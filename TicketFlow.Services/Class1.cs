@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TicketFlow.Services
+﻿namespace TicketFlow.Services
 {
     public class Class1
     {
+
     }
 }
