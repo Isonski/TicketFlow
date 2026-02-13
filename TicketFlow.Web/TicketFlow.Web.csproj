@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TicketFlow.Data\TicketFlow.Data.csproj" />
+    <ProjectReference Include="..\TicketFlow.Services\TicketFlow.Services.csproj" />
+  </ItemGroup>
+
 </Project>
