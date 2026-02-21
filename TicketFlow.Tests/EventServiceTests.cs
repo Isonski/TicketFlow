@@ -2,7 +2,6 @@
 using TicketFlow.Data;
 using TicketFlow.Data.Models;
 using TicketFlow.Services.Implementations;
-using Xunit;
 
 public class EventServiceTests
 {
@@ -16,50 +15,52 @@ public class EventServiceTests
     }
 
     [Fact]
-    public async Task GetAllEventsAsync_ReturnsAllEvents()
+    public async Task GetAllEventsAsync_ShouldReturnAllEvents()
     {
         var context = GetDbContext();
-        context.Events.Add(new Event { Name = "Test Event" });
+
+        context.Events.Add(new Event { Name = "A", Description = "D", Location = "L", Date = DateTime.Now });
+        context.Events.Add(new Event { Name = "B", Description = "D2", Location = "L2", Date = DateTime.Now });
         await context.SaveChangesAsync();
 
         var service = new EventService(context);
 
         var result = await service.GetAllEventsAsync();
 
-        Assert.Single(result);
+        Assert.Equal(2, result.Count());
     }
 
     [Fact]
-    public async Task CreateEventAsync_AddsEventToDatabase()
+    public async Task GetEventByIdAsync_ShouldReturnCorrectEvent()
+    {
+        var context = GetDbContext();
+
+        var ev = new Event { Name = "Test", Description = "D", Location = "L", Date = DateTime.Now };
+        context.Events.Add(ev);
+        await context.SaveChangesAsync();
+
+        var service = new EventService(context);
+
+        var result = await service.GetEventByIdAsync(ev.Id);
+
+        Assert.NotNull(result);
+        Assert.Equal("Test", result.Name);
+    }
+
+    [Fact]
+    public async Task CreateEventAsync_ShouldAddEventToDatabase()
     {
         var context = GetDbContext();
         var service = new EventService(context);
 
-        var ev = new Event { Name = "New Event" };
+        var ev = new Event { Name = "New", Description = "D", Location = "L", Date = DateTime.Now };
 
         await service.CreateEventAsync(ev);
 
         Assert.Equal(1, context.Events.Count());
     }
     [Fact]
-    public async Task GetEventByIdAsync_ReturnsCorrectEvent()
-    {
-        var context = GetDbContext();
-
-        var ev = new Event { Id = 1, Name = "Concert" };
-        context.Events.Add(ev);
-        await context.SaveChangesAsync();
-
-        var service = new EventService(context);
-
-        var result = await service.GetEventByIdAsync(1);
-
-        Assert.NotNull(result);
-        Assert.Equal("Concert", result.Name);
-    }
-
-    [Fact]
-    public async Task GetEventByIdAsync_ReturnsNull_WhenEventDoesNotExist()
+    public async Task GetEventByIdAsync_ShouldReturnNull_WhenEventDoesNotExist()
     {
         var context = GetDbContext();
         var service = new EventService(context);
