@@ -1,3 +1,7 @@
+using TicketFlow.Services.Interfaces;
+using TicketFlow.Services.Implementations;
+using TicketFlow.Data;
+using Microsoft.EntityFrameworkCore;
 namespace TicketFlow.Web
 {
     public class Program
@@ -8,6 +12,9 @@ namespace TicketFlow.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<TicketFlowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IEventService, EventService>();
+
 
             var app = builder.Build();
 
@@ -28,7 +35,7 @@ namespace TicketFlow.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Events}/{action=Index}/{id?}");
 
             app.Run();
         }

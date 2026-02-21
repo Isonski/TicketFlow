@@ -1,0 +1,18 @@
+﻿@model TicketFlow.Data.Models.Event
+<h2>Редактирай събитие</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="date" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Запази</button>
+</form>

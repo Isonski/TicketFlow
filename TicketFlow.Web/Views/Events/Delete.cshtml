@@ -1,0 +1,12 @@
+﻿@model TicketFlow.Data.Models.Event
+<h2>Изтрий събитие</h2>
+<p>Сигурна ли си, че искаш да изтриеш това събитие?</p>
+<ul>
+    <li><strong>Име:</strong> @Model.Name</li>
+    <li><strong>Дата:</strong> @Model.Date</li>
+    <li><strong>Място:</strong> @Model.Location</li>
+</ul>
+<form asp-action="DeleteConfirmed" method="post"> 
+    <input type="hidden" asp-for="Id" /> 
+    <button type="submit" class="btn btn-danger">Изтрий</button>
+</form>
