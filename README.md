@@ -14,11 +14,19 @@ Project created by:
 - Razor Views
 - Dependency Injection
 # Usage
-- Create, edit, delete events 
-- Manage tickets and categories 
-- User login and roles
-- Full CRUD functionality
- # Authentication 
- - ASP.NET Core Identity
- - Roles: User, Admin
+- Create, edit, delete events
+- Manage ticket types and availability
+-Add categories, descriptions, dates and locations
+-View detailed event pages
 
+# Testing
+-Unit tests for core business logic
+-Controller tests
+-InMemory database for realistic scenarios
+-Verified CRUD operations
+
+# Future Improvements
+-User accounts & roles
+-Online payments
+-QR code tickets
+-Sales analytics dashboard
