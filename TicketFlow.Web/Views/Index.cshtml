@@ -1,0 +1,10 @@
+﻿@model IEnumerable<TicketFlow.Data.Models.Event>
+
+<h2>Events</h2>
+
+<ul>
+    @foreach (var ev in Model)
+    {
+        <li>@ev.Name (@ev.Date.ToShortDateString())</li>
+    }
+</ul>
